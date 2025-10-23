@@ -12,7 +12,7 @@ export default async function Home({ searchParams }: PageProps) {
   const params = await searchParams;
   const q = params.q || "";
   return (
-    <div className="container mx-auto grid gap-8 py-10">
+    <div className="grid gap-4">
       <Search />
       <Suspense key={q} fallback={<PodcastsResultSkeleton />}>
         <PodcastsGrid q={q} />
@@ -32,15 +32,16 @@ async function PodcastsGrid({ q }: { q?: string }) {
   if (!response.success) return <div>Something went Wrong.</div>;
 
   return (
-    <div className="flex flex-nowrap  overflow-scroll">
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6">
       {response.data?.map((podcast) => (
-        <div key={podcast.trackId}>
+        <div key={podcast.trackId} className="space-y-1">
           <Image
-            src={podcast.artworkUrl100}
+            src={podcast.artworkUrl600}
             alt={podcast.artistName}
             width={400}
             height={400}
           />
+          <p>{podcast.trackName}</p>
           <p>{podcast.artistName}</p>
         </div>
       ))}

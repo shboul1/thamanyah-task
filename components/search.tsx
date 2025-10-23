@@ -11,7 +11,7 @@ export default function SearchInput() {
   );
 
   return (
-    <InputGroup>
+    <InputGroup className="rounded-full sticky top-0 bg-white">
       <InputGroupInput
         type="text"
         placeholder="Search for podcasts..."
