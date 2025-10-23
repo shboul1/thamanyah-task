@@ -14,6 +14,7 @@ export default function SearchInput() {
     <InputGroup className="rounded-full bg-white">
       <InputGroupInput
         type="text"
+        className="font-medium text-base!"
         placeholder="Search for podcasts..."
         value={search}
         onChange={(e) =>

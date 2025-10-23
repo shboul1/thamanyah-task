@@ -6,9 +6,8 @@ import "./globals.css";
 import Sidebar from "@/components/sidebar";
 
 const myFont = localFont({
-  src: "./IBMPlexSansArabic-Regular.otf",
+  src: "../public/IBMPlexSansArabic-Regular.otf",
   variable: "--font-ibm-plex-sans",
-  weight: "400",
 });
 
 const geistSans = Geist({
