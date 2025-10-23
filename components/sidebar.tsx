@@ -1,17 +1,66 @@
-import { Github } from "lucide-react";
+import { Clock, Globe, Home, LayoutGrid, Rows3 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { Button } from "./ui/button";
 
 export default function Sidebar() {
   return (
-    <aside className="hidden md:flex flex-col border-r p-4">
+    <aside className="hidden md:flex flex-col border-r p-6 space-y-10">
       <Image
         src="/thmanyah-logo.svg"
         alt="Thamanyah Logo"
         width={60}
         height={60}
       />
+      <div className="space-y-4">
+        <ul>
+          <li>
+            <Button asChild variant="ghost" className="p-0!">
+              <Link href="/">
+                <Home size={20} />
+                Home
+              </Link>
+            </Button>
+          </li>
+          <li>
+            <Button asChild variant="ghost" className="p-0!">
+              <Link href="/">
+                <Globe size={20} />
+                Discover
+              </Link>
+            </Button>
+          </li>
+        </ul>
+        <div className="space-y-2">
+          <p className="text-muted-foreground font-bold text-sm">YOUR STUFF</p>
+          <ul>
+            <li>
+              <Button asChild variant="ghost" className="p-0!">
+                <Link href="/">
+                  <Rows3 size={20} />
+                  My Queue
+                </Link>
+              </Button>
+            </li>
+            <li>
+              <Button asChild variant="ghost" className="p-0!">
+                <Link href="/">
+                  <LayoutGrid size={20} />
+                  My Podcasts
+                </Link>
+              </Button>
+            </li>
+            <li>
+              <Button asChild variant="ghost" className="p-0!">
+                <Link href="/">
+                  <Clock size={20} />
+                  Recents
+                </Link>
+              </Button>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div className="mt-auto">
         <Link
           target="_blank"
