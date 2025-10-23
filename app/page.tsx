@@ -9,6 +9,11 @@ interface PageProps {
   searchParams: Promise<{ q?: string }>;
 }
 
+const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.VERCEL_URL
+    : "http://localhost:3000";
+
 export default async function Home({ searchParams }: PageProps) {
   const params = await searchParams;
   const q = params.q || "";
@@ -26,7 +31,7 @@ export default async function Home({ searchParams }: PageProps) {
 }
 
 async function PodcastsGrid({ q }: { q?: string }) {
-  const podcasts = await fetch("http://localhost:3000/api/search?q=" + q);
+  const podcasts = await fetch(BASE_URL + "/api/search?q=" + q);
   const response: {
     success: boolean;
     data?: Podcast[];
