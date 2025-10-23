@@ -27,9 +27,7 @@ export default async function Home({ searchParams }: PageProps) {
 
 async function PodcastsGrid({ q }: { q?: string }) {
   const podcasts = await fetch(
-    process.env.VERCEL_ENV === "production"
-      ? "https://" + process.env.VERCEL_URL
-      : "http://localhost:3000" + "/api/search?q=" + q
+    process.env.NEXT_PUBLIC_BASE_URL + "/api/search?q=" + q
   );
   const response: {
     success: boolean;
