@@ -10,9 +10,7 @@ interface PageProps {
 }
 
 const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? process.env.VERCEL_URL
-    : "http://localhost:3000";
+  process.env.NODE_ENV === "production" ? "" : "http://localhost:3000";
 
 export default async function Home({ searchParams }: PageProps) {
   const params = await searchParams;
