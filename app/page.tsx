@@ -3,7 +3,6 @@ import PodcastCard from "@/components/podcast-card";
 import PodcastsResultSkeleton from "@/components/podcast-result-skeleton";
 import Search from "@/components/search";
 import { Podcast } from "@/types";
-import Image from "next/image";
 import { Suspense } from "react";
 
 interface PageProps {
@@ -15,7 +14,7 @@ export default async function Home({ searchParams }: PageProps) {
   const q = params.q || "";
   return (
     <div className="grid gap-0">
-      <div className="flex items-center gap-2 sticky top-0 bg-background p-4">
+      <div className="flex items-center gap-2 sticky z-10 top-0 bg-background p-4">
         <Search />
         <LayoutViewOptions />
       </div>
@@ -38,7 +37,7 @@ async function PodcastsGrid({ q }: { q?: string }) {
 
   return (
     <div>
-      <p className="mb-4 text-sm text-gray-500 sticky top-17 px-4 py-2 border-b shadow-xs bg-background">
+      <p className="mb-4 text-sm text-gray-500 sticky z-10 top-17 px-4 py-2 border-b shadow-xs bg-background">
         Top Podcasts for {q || "all"}
       </p>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 px-4 pb-10">
