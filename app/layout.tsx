@@ -39,9 +39,7 @@ export default function RootLayout({
         <NuqsAdapter>
           <main className="font-ibm-plex grid grid-cols-1 md:grid-cols-[220px_1fr] min-h-dvh">
             <Sidebar />
-            <div className="px-4 py-2 max-h-dvh overflow-scroll">
-              {children}
-            </div>
+            <div className="max-h-dvh overflow-scroll">{children}</div>
           </main>
         </NuqsAdapter>
       </body>

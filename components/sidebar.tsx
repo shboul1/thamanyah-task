@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Sidebar() {
   return (
-    <aside className="hidden md:flex flex-col border-r-2 p-4">
+    <aside className="hidden md:flex flex-col border-r p-4">
       <Image
         src="/thmanyah-logo.svg"
         alt="Thamanyah Logo"
@@ -16,7 +16,7 @@ export default function Sidebar() {
         <Link
           target="_blank"
           href="https://github.com/shboul1/thamanyah-task"
-          className="text-sm flex items-end gap-2"
+          className="text-sm flex items-end gap-2 hover:underline"
         >
           <svg viewBox="0 0 1024 1024" fill="none" width={20} height={20}>
             <path
