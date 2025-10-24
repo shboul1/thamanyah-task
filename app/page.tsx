@@ -11,6 +11,16 @@ interface PageProps {
 
 export default function Home({ searchParams }: PageProps) {
   return (
+    <Suspense>
+      <HomeContent searchParams={searchParams} />
+    </Suspense>
+  );
+}
+
+async function HomeContent({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const q = params.q || "";
+  return (
     <div className="grid gap-0">
       <div className="flex items-center gap-2 sticky z-10 top-0 bg-background p-4">
         <Suspense fallback={null}>
@@ -18,20 +28,14 @@ export default function Home({ searchParams }: PageProps) {
         </Suspense>
         <LayoutViewOptions />
       </div>
-      <Suspense fallback={<PodcastsResultSkeleton />}>
-        <PodcastsGrid searchParams={searchParams} />
+      <Suspense key={q} fallback={<PodcastsResultSkeleton />}>
+        <PodcastsGrid q={q} />
       </Suspense>
     </div>
   );
 }
 
-async function PodcastsGrid({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
-  const params = await searchParams;
-  const q = params.q || "";
+async function PodcastsGrid({ q }: { q?: string }) {
   const podcasts = await fetch(
     process.env.NEXT_PUBLIC_BASE_URL + "/api/search?q=" + q
   );
@@ -48,7 +52,7 @@ async function PodcastsGrid({
       <p className="mb-4 text-sm text-gray-500 sticky z-10 top-17 px-4 py-2 border-b shadow-xs bg-background">
         Top Podcasts for {q || "all"}
       </p>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 px-4 pb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 pb-10">
         {response.data?.map((podcast) => (
           <PodcastCard key={podcast.trackId} podcast={podcast} />
         ))}
