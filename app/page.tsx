@@ -9,23 +9,29 @@ interface PageProps {
   searchParams: Promise<{ q?: string }>;
 }
 
-export default async function Home({ searchParams }: PageProps) {
-  const params = await searchParams;
-  const q = params.q || "";
+export default function Home({ searchParams }: PageProps) {
   return (
     <div className="grid gap-0">
       <div className="flex items-center gap-2 sticky z-10 top-0 bg-background p-4">
-        <Search />
+        <Suspense fallback={null}>
+          <Search />
+        </Suspense>
         <LayoutViewOptions />
       </div>
-      <Suspense key={q} fallback={<PodcastsResultSkeleton />}>
-        <PodcastsGrid q={q} />
+      <Suspense fallback={<PodcastsResultSkeleton />}>
+        <PodcastsGrid searchParams={searchParams} />
       </Suspense>
     </div>
   );
 }
 
-async function PodcastsGrid({ q }: { q?: string }) {
+async function PodcastsGrid({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string }>;
+}) {
+  const params = await searchParams;
+  const q = params.q || "";
   const podcasts = await fetch(
     process.env.NEXT_PUBLIC_BASE_URL + "/api/search?q=" + q
   );
