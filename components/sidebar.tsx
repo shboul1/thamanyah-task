@@ -9,13 +9,14 @@ export default function Sidebar() {
       <Image
         src="/thmanyah-logo.svg"
         alt="Thamanyah Logo"
-        width={60}
-        height={60}
+        width={50}
+        height={50}
+        className="ml-2"
       />
       <div className="space-y-4">
         <ul>
           <li>
-            <Button asChild variant="ghost" className="p-0!">
+            <Button asChild variant="ghost" className="px-10">
               <Link href="/">
                 <Home size={20} />
                 Home
@@ -23,7 +24,7 @@ export default function Sidebar() {
             </Button>
           </li>
           <li>
-            <Button asChild variant="ghost" className="p-0!">
+            <Button asChild variant="ghost" className="px-10">
               <Link href="/">
                 <Globe size={20} />
                 Discover
@@ -35,7 +36,7 @@ export default function Sidebar() {
           <p className="text-muted-foreground font-bold text-sm">YOUR STUFF</p>
           <ul>
             <li>
-              <Button asChild variant="ghost" className="p-0!">
+              <Button asChild variant="ghost" className="px-10">
                 <Link href="/">
                   <Rows3 size={20} />
                   My Queue
@@ -43,7 +44,7 @@ export default function Sidebar() {
               </Button>
             </li>
             <li>
-              <Button asChild variant="ghost" className="p-0!">
+              <Button asChild variant="ghost" className="px-10">
                 <Link href="/">
                   <LayoutGrid size={20} />
                   My Podcasts
@@ -51,7 +52,7 @@ export default function Sidebar() {
               </Button>
             </li>
             <li>
-              <Button asChild variant="ghost" className="p-0!">
+              <Button asChild variant="ghost" className="px-10">
                 <Link href="/">
                   <Clock size={20} />
                   Recents

@@ -1,5 +1,6 @@
 import LayoutViewOptions from "@/components/layout-view-options";
 import PodcastCard from "@/components/podcast-card";
+import PodcastGrid from "@/components/podcast-grid";
 import PodcastsResultSkeleton from "@/components/podcast-result-skeleton";
 import Search from "@/components/search";
 import { Podcast } from "@/types";
@@ -27,16 +28,15 @@ async function HomeContent({ searchParams }: PageProps) {
         <Suspense fallback={null}>
           <Search />
         </Suspense>
-        <LayoutViewOptions />
       </div>
       <Suspense key={q} fallback={<PodcastsResultSkeleton />}>
-        <PodcastsGrid q={q} />
+        <PodcastsFetcher q={q} />
       </Suspense>
     </div>
   );
 }
 
-async function PodcastsGrid({ q }: { q?: string }) {
+async function PodcastsFetcher({ q }: { q?: string }) {
   const podcasts = await fetch(
     process.env.NEXT_PUBLIC_BASE_URL + "/api/search?q=" + q
   );
@@ -50,21 +50,11 @@ async function PodcastsGrid({ q }: { q?: string }) {
 
   return (
     <div>
-      <p className="mb-4 text-sm text-gray-500 sticky z-10 top-17 px-4 py-2 border-b shadow-xs bg-background">
-        Top Podcasts for {q || "all"}
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 pb-10">
-        {response.data && response.data.length > 0 ? (
-          response.data?.map((podcast) => (
-            <PodcastCard key={podcast.trackId} podcast={podcast} />
-          ))
-        ) : (
-          <div className="col-span-4 text-muted-foreground flex-col gap-4 h-[500px] flex items-center justify-center">
-            <MicVocal size={40} />
-            Type in a search term to start.
-          </div>
-        )}
+      <div className="flex mb-4  items-center justify-between border-b shadow-xs px-4 py-2 bg-background sticky z-10 top-17">
+        <p className="text-sm text-gray-500">Top Podcasts for {q || "all"}</p>
+        <LayoutViewOptions />
       </div>
+      <PodcastGrid podcasts={response.data || []} />
     </div>
   );
 }
