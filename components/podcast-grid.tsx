@@ -18,7 +18,7 @@ export default function PodcastGrid({ podcasts }: { podcasts: Podcast[] }) {
   return (
     <div
       className={cn("px-4 pb-10 gap-6", {
-        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4":
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5":
           layout === "grid",
         "overflow-scroll flex w-dvw md:w-[calc(100dvw-220px)]":
           layout === "scroll",
