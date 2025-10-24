@@ -13,6 +13,7 @@ export default function SearchInput() {
   return (
     <InputGroup className="rounded-full bg-white">
       <InputGroupInput
+        autoFocus
         type="text"
         className="font-medium text-base!"
         placeholder="Search for podcasts..."

@@ -3,6 +3,7 @@ import PodcastCard from "@/components/podcast-card";
 import PodcastsResultSkeleton from "@/components/podcast-result-skeleton";
 import Search from "@/components/search";
 import { Podcast } from "@/types";
+import { MicVocal } from "lucide-react";
 import { Suspense } from "react";
 
 interface PageProps {
@@ -53,9 +54,16 @@ async function PodcastsGrid({ q }: { q?: string }) {
         Top Podcasts for {q || "all"}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 pb-10">
-        {response.data?.map((podcast) => (
-          <PodcastCard key={podcast.trackId} podcast={podcast} />
-        ))}
+        {response.data && response.data.length > 0 ? (
+          response.data?.map((podcast) => (
+            <PodcastCard key={podcast.trackId} podcast={podcast} />
+          ))
+        ) : (
+          <div className="col-span-4 text-muted-foreground flex-col gap-4 h-[500px] flex items-center justify-center">
+            <MicVocal size={40} />
+            Type in a search term to start.
+          </div>
+        )}
       </div>
     </div>
   );
