@@ -30,7 +30,11 @@ export default function PodcastGrid({
       >
         {podcasts && podcasts.length > 0 ? (
           podcasts?.map((podcast) => (
-            <PodcastCard key={podcast.trackId} podcast={podcast} />
+            <PodcastCard
+              key={podcast.trackId}
+              podcast={podcast}
+              layout={layout}
+            />
           ))
         ) : (
           <div className="col-span-4 text-muted-foreground flex-col gap-4 h-[500px] flex items-center justify-center">
