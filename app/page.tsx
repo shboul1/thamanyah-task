@@ -1,17 +1,14 @@
-import LayoutViewOptions from "@/components/layout-view-options";
-import PodcastCard from "@/components/podcast-card";
 import PodcastGrid from "@/components/podcast-grid";
 import PodcastsResultSkeleton from "@/components/podcast-result-skeleton";
 import Search from "@/components/search";
 import { Podcast } from "@/types";
-import { MicVocal } from "lucide-react";
 import { Suspense } from "react";
 
 interface PageProps {
   searchParams: Promise<{ q?: string }>;
 }
 
-export default function Home({ searchParams }: PageProps) {
+export default function Page({ searchParams }: PageProps) {
   return (
     <Suspense>
       <HomeContent searchParams={searchParams} />
@@ -25,9 +22,7 @@ async function HomeContent({ searchParams }: PageProps) {
   return (
     <div className="grid gap-0">
       <div className="flex items-center gap-2 sticky z-10 top-0 bg-background p-4">
-        <Suspense fallback={null}>
-          <Search />
-        </Suspense>
+        <Search />
       </div>
       <Suspense key={q} fallback={<PodcastsResultSkeleton />}>
         <PodcastsFetcher q={q} />
@@ -48,13 +43,5 @@ async function PodcastsFetcher({ q }: { q?: string }) {
 
   if (!response.success) return <div>Something went Wrong.</div>;
 
-  return (
-    <div>
-      <div className="flex mb-4  items-center justify-between border-b shadow-xs px-4 py-2 bg-background sticky z-10 top-17">
-        <p className="text-sm text-gray-500">Top Podcasts for {q || "all"}</p>
-        <LayoutViewOptions />
-      </div>
-      <PodcastGrid podcasts={response.data || []} />
-    </div>
-  );
+  return <PodcastGrid q={q} podcasts={response.data || []} />;
 }

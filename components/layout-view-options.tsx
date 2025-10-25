@@ -10,19 +10,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { EllipsisVertical } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
-export default function LayoutViewOptions() {
-  const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-  const [state, setState] = useState<"grid" | "scroll">("grid");
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-  const layout = localStorage.getItem("layout") as "grid" | "scroll";
+export default function LayoutViewOptions({
+  value,
+  onValueChange,
+}: {
+  value: "grid" | "scroll";
+  onValueChange: (value: "grid" | "scroll") => void;
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -34,12 +29,8 @@ export default function LayoutViewOptions() {
         <DropdownMenuLabel>Layout</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup
-          value={state || layout || "grid"}
-          onValueChange={(value) => {
-            localStorage.setItem("layout", value);
-            setState(value as "grid" | "scroll");
-            router.refresh();
-          }}
+          value={value}
+          onValueChange={(value) => onValueChange(value as "grid" | "scroll")}
         >
           <DropdownMenuRadioItem value="scroll">Scroll</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="grid">Grid</DropdownMenuRadioItem>
