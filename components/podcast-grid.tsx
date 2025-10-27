@@ -37,7 +37,7 @@ export default function PodcastGrid({
             />
           ))
         ) : (
-          <div className="col-span-4 text-muted-foreground flex-col gap-4 h-[500px] flex items-center justify-center">
+          <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-5 text-muted-foreground flex-col gap-4 h-[500px] flex items-center justify-center">
             <MicVocal size={40} />
             Type in a search term to start.
           </div>
